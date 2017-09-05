@@ -6,19 +6,21 @@ using System.Threading.Tasks;
 using System.Json;
 using System.Net;
 using System.IO;
-using Android.Content;
 using System.Collections;
 using Android.Support.V7.Widget;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using System.Collections.Specialized;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace MoodyMusic
 {
     [Activity(Label = "MoodyMusic", MainLauncher = true, Icon = "@mipmap/icon")]
     public class MainActivity : Activity
     {
-        private string bearer;
-        private string spotifyAppToken;
+        private string bearer = "22dfba5cea004c11a63531f9dfd4b3d4:ee471489041d4f5fa36e7b0d1125dfa7";
+        private string spotifyAppToken = "";
         protected override void OnCreate(Bundle savedInstanceState)
         {
  
@@ -37,10 +39,8 @@ namespace MoodyMusic
             Button moodSubmitButton = FindViewById<Button>(Resource.Id.moodSubmitButton);
             moodSubmitButton.Click += async (sender, error) =>
             {
-                // Get oAuth first //
                 // Get oAuth Token //
-                JsonValue tokenReponse = await GetSpotifyToken("https://accounts.spotify.com/api/token");
-                Console.WriteLine(tokenReponse["access_token"].ToString());
+                spotifyAppToken = GetSpotifyToken("https://accounts.spotify.com/api/token");
 
                 // Get text from input //
                 string enteredMood = moodInput.Text;
@@ -79,35 +79,24 @@ namespace MoodyMusic
             };
         }
 
-        private async Task<JsonValue> GetSpotifyToken(string url)
+        private string GetSpotifyToken(string url)
         {
-            // Create body parameter //
-            string param = "grant_type=client_credentials";
-            byte [] byteParam = ObjectToByteArray(param);
-            var encodedString = Convert.ToBase64String(Encoding.UTF8.GetBytes(bearer));
+            var webClient = new WebClient();
 
-            WebRequest myRequest = WebRequest.Create(url);
-            myRequest.Method = "POST";
-            myRequest.Headers.Add("Authorization: Basic encodedString");
-            myRequest.ContentType = "application/x-www-form-urlencoded";
-            myRequest.ContentLength = byteParam.Length;
-            Stream dataStream = myRequest.GetRequestStream();
-            dataStream.Write(byteParam, 0, byteParam.Length);
-            dataStream.Close();
+            var postparams = new NameValueCollection();
 
-            // Send the request to the server and wait for the response:
-            using (WebResponse response = await myRequest.GetResponseAsync())
-            {
-                // Get a stream representation of the HTTP web response:
-                using (Stream stream = response.GetResponseStream())
-                {
-                    // Use this stream to build a JSON document object:
-                    JsonValue newJson = JsonValue.Load(stream);
+            postparams.Add("grant_type", "client_credentials");
 
-                    // Return the JSON document:
-                    return newJson;
-                }
-            }
+            var authHeader = Convert.ToBase64String(Encoding.Default.GetBytes(bearer));
+
+            webClient.Headers.Add(HttpRequestHeader.Authorization, "Basic " + authHeader);
+
+            var tokenResponse = webClient.UploadValues(url, postparams);
+
+            var textResponse = Encoding.UTF8.GetString(tokenResponse);
+            Dictionary<string, string> respoonse = JsonConvert.DeserializeObject<Dictionary<string, string>>(textResponse);
+
+            return respoonse["access_token"];
         }
 
         byte[] ObjectToByteArray(object obj)
