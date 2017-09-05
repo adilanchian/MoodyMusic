@@ -39,6 +39,9 @@ namespace MoodyMusic
             Button moodSubmitButton = FindViewById<Button>(Resource.Id.moodSubmitButton);
             moodSubmitButton.Click += async (sender, error) =>
             {
+                // Clear ArrayList //
+                playlists.Clear();
+
                 // Get oAuth Token //
                 spotifyAppToken = GetSpotifyToken("https://accounts.spotify.com/api/token");
 
@@ -52,12 +55,6 @@ namespace MoodyMusic
                 // Add layout manager //
                 recyclerManager = new LinearLayoutManager(this);
                 playlistRecylerView.SetLayoutManager(recyclerManager);
-
-                // Remove text from input to start over //
-                moodInput.Text = "";
-
-                moodTitle.Text = enteredMood;
-
 
                 foreach (JsonValue item in json["playlists"]["items"])
                 {
@@ -76,6 +73,14 @@ namespace MoodyMusic
                 // Instantiate adapter //
                 playlistAdapter = new PlaylistAdapter(playlists);
                 playlistRecylerView.SetAdapter(playlistAdapter);
+
+                // Clear and update RecyclerView //
+                playlistAdapter.NotifyDataSetChanged();
+
+                // Remove text from input to start over //
+                moodInput.Text = "";
+
+                moodTitle.Text = "When you are feeling "+enteredMood.ToLower();
             };
         }
 
