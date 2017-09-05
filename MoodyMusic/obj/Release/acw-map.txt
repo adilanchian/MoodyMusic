@@ -1,0 +1,4 @@
+MoodyMusic.MainActivity, MoodyMusic;md576bc5f13baa0bffb0432dad43643216b.MainActivity
+MoodyMusic.MainActivity, MoodyMusic, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md576bc5f13baa0bffb0432dad43643216b.MainActivity
+MoodyMusic.MainActivity;md576bc5f13baa0bffb0432dad43643216b.MainActivity
+moodymusic.MainActivity;md576bc5f13baa0bffb0432dad43643216b.MainActivity

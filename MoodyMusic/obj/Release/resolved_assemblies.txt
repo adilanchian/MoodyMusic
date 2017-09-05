@@ -1,0 +1,9 @@
+C:\Users\aldilanc\source\repos\MoodyMusic\MoodyMusic\obj\Release\android\assets\MoodyMusic.dll
+C:\Users\aldilanc\source\repos\MoodyMusic\MoodyMusic\obj\Release\android\assets\Java.Interop.dll
+C:\Users\aldilanc\source\repos\MoodyMusic\MoodyMusic\obj\Release\android\assets\Mono.Android.dll
+C:\Users\aldilanc\source\repos\MoodyMusic\MoodyMusic\obj\Release\android\assets\System.Core.dll
+C:\Users\aldilanc\source\repos\MoodyMusic\MoodyMusic\obj\Release\android\assets\System.dll
+C:\Users\aldilanc\source\repos\MoodyMusic\MoodyMusic\obj\Release\android\assets\System.Json.dll
+C:\Users\aldilanc\source\repos\MoodyMusic\MoodyMusic\obj\Release\android\assets\mscorlib.dll
+C:\Users\aldilanc\source\repos\MoodyMusic\MoodyMusic\obj\Release\android\assets\System.Runtime.Serialization.dll
+C:\Users\aldilanc\source\repos\MoodyMusic\MoodyMusic\obj\Release\android\assets\Mono.Security.dll
