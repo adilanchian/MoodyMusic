@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Json;
 using System.Net;
 using System.IO;
-using Android.Content;
 using System.Collections;
 using Android.Support.V7.Widget;
 using System.Runtime.Serialization.Formatters.Binary;
