@@ -78,5 +78,10 @@ namespace MoodyMusic
 
             return imageBitmap;
         }
+
+        public void ClearList()
+        {
+            this.playlists.Clear();
+        }
     }
 }
