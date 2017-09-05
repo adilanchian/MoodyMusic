@@ -75,7 +75,8 @@ namespace MoodyMusic
                 playlistRecylerView.SetAdapter(playlistAdapter);
 
                 // Clear and update RecyclerView //
-                playlistAdapter.NotifyDataSetChanged();
+                //playlistAdapter.NotifyDataSetChanged();
+                playlistAdapter.NotifyItemRangeChanged(0, 10);
 
                 // Remove text from input to start over //
                 moodInput.Text = "";
