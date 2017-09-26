@@ -9,7 +9,9 @@
     <Import_RootNamespace>MoodyMusicSharedProject</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Constants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Playlist.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SpotifyServices.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RestService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SpotifyService.cs" />
   </ItemGroup>
 </Project>

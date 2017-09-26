@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.12
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoodyMusic.Android", "MoodyMusic\MoodyMusic.Android.csproj", "{08565C6D-024A-4C78-BA37-044C6778E90E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoodyMusic.WinApp", "MoodyMusic.WinApp\MoodyMusic.WinApp.csproj", "{0EFA1D2B-42BB-4A5D-84A5-3FAB3989C32C}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MoodyMusicSharedProject", "MoodyMusicSharedProject\MoodyMusicSharedProject.shproj", "{6A4A6FC3-6334-47D9-9FCE-A1356278AE3A}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MoodyMusic.Shared", "MoodyMusicSharedProject\MoodyMusic.Shared.shproj", "{6A4A6FC3-6334-47D9-9FCE-A1356278AE3A}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution

@@ -1,10 +1,12 @@
 ﻿using Android.App;
 using Android.Widget;
 using Android.OS;
-using System.Json;
 using System.Collections;
 using Android.Support.V7.Widget;
+using Newtonsoft.Json.Linq;
 using MoodyMusicSharedProject;
+using System.Threading.Tasks;
+using System;
 
 namespace MoodyMusic
 {
@@ -20,58 +22,62 @@ namespace MoodyMusic
             // Proprties //
             EditText moodInput = FindViewById<EditText>(Resource.Id.moodInput);
             TextView moodTitle = FindViewById<TextView>(Resource.Id.moodTitle);
-            ArrayList playlists = new ArrayList();
             RecyclerView playlistRecylerView = FindViewById<RecyclerView>(Resource.Id.playlistRecyclerView);
             RecyclerView.LayoutManager recyclerManager;
-            PlaylistAdapter playlistAdapter;
-            SpotifyServices spotify = new SpotifyServices();
+            SpotifyService spotify = new SpotifyService();
+
+            spotify.SetAuthToken();
 
             // Get reference to the submit button and input text //
             Button moodSubmitButton = FindViewById<Button>(Resource.Id.moodSubmitButton);
-            moodSubmitButton.Click += async (sender, error) =>
-            {
-                // Clear ArrayList //
-                playlists.Clear();
 
+            moodSubmitButton.Click += (sender, error) =>
+            {
                 // Get text from input //
                 string enteredMood = moodInput.Text;
-
-                // Build URL endpoint //
-                string endpoint = "https://api.spotify.com/v1/search?q=" + enteredMood + "&type=playlist" + "&limit=10";
-                JsonValue json = await spotify.Search(endpoint);
 
                 // Add layout manager //
                 recyclerManager = new LinearLayoutManager(this);
                 playlistRecylerView.SetLayoutManager(recyclerManager);
 
-                foreach (JsonValue item in json["playlists"]["items"])
-                {
-                    // Create playlist object //
-                    Playlist playlist = new Playlist();
-
-                    // Set properties of playlist //
-                    playlist.Name = item["name"];
-                    playlist.ExternalUrl = item["external_urls"]["spotify"];
-                    playlist.Images = item["images"];
-                    playlist.OwnerID = item["owner"]["id"];
-
-                    playlists.Add(playlist);
-                }
-
-                // Instantiate adapter //
-                playlistAdapter = new PlaylistAdapter(playlists);
-                playlistRecylerView.SetAdapter(playlistAdapter);
-
-                // Clear and update RecyclerView //
-                //playlistAdapter.NotifyDataSetChanged();
-                playlistAdapter.NotifyItemRangeChanged(0, 10);
+                // Build URL endpoint //
+                string endpoint = "https://api.spotify.com/v1/search?q=" + enteredMood + "&type=playlist" + "&limit=10";
+                spotify.Search(endpoint, (json) => this.populateList(json, playlistRecylerView));
 
                 // Remove text from input to start over //
                 moodInput.Text = "";
-
                 moodTitle.Text = "When you are feeling " + enteredMood.ToLower();
             };
         }
+
+        private void populateList(JObject json, RecyclerView recyler)
+        {
+            ArrayList playlists = new ArrayList();
+            PlaylistAdapter playlistAdapter;
+
+            // Clear ArrayList //
+            playlists.Clear();
+
+            foreach (JObject item in json["playlists"]["items"])
+            {
+                // Create playlist object //
+                Playlist playlist = new Playlist();
+
+                // Set properties of playlist //
+                playlist.Name = (string)item["name"];
+                playlist.ExternalUrl = (string)item["external_urls"]["spotify"];
+                playlist.Image = (string)item["images"][0]["url"];
+                playlist.OwnerID = (string)item["owner"]["id"];
+                playlists.Add(playlist);
+            }
+
+
+            // Instantiate adapter //
+            playlistAdapter = new PlaylistAdapter(playlists);
+            recyler.SetAdapter(playlistAdapter);
+
+            // Clear and update RecyclerView //
+            playlistAdapter.NotifyItemRangeChanged(0, 10);
+        }
     }
 }
-

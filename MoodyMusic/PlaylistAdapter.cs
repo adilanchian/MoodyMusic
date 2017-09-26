@@ -34,7 +34,7 @@ namespace MoodyMusic
             Playlist currentPlaylist = playlists[position] as Playlist;
 
             // Load the photo image resource from the photo album:
-            var bitmap = GetImageBitmapFromUrl(currentPlaylist.Images[0]["url"]);
+            var bitmap = GetImageBitmapFromUrl(currentPlaylist.Image);
 
             // Set data to cells //
             viewHolder.PlaylistImage.SetImageBitmap(bitmap);
