@@ -5,7 +5,7 @@ using Android.Support.V7.Widget;
 using System.Collections;
 using Android.Graphics;
 using System.Net;
-using MoodyMusicSharedProject;
+using MoodyMusic.Shared;
 
 namespace MoodyMusic
 {

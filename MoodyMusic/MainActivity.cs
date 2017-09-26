@@ -4,7 +4,7 @@ using Android.OS;
 using System.Collections;
 using Android.Support.V7.Widget;
 using Newtonsoft.Json.Linq;
-using MoodyMusicSharedProject;
+using MoodyMusic.Shared;
 using System.Threading.Tasks;
 using System;
 

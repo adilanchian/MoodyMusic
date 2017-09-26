@@ -6,7 +6,7 @@ using System.Net.Http;
 using Newtonsoft.Json.Linq;
 using System.Net.Http.Headers;
 
-namespace MoodyMusicSharedProject
+namespace MoodyMusic.Shared
 {
     class SpotifyService
     {

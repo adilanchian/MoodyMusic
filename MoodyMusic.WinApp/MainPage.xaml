@@ -7,7 +7,27 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    <Grid x:Name="contentPanel" Background="LightGray">
+        <ListView x:Name="playlistTable" HorizontalAlignment="Stretch" IsItemClickEnabled="true" SelectionMode="None">
+            <ListView.Header>
+                <StackPanel Margin="60" Padding="10" Background="LightGray">
+                    <TextBlock FontSize="30" HorizontalAlignment="Center" Padding="10">How are you feeling?</TextBlock>
+                    <TextBox x:Name="moodInput" Margin="10"></TextBox>
+                    <Button x:Name="moodSubmit" HorizontalAlignment="Stretch" Height="40" FontSize="15" Padding="10">Submit</Button>
+                    <TextBlock x:Name="moodTitle" FontSize="20" HorizontalAlignment="Center"></TextBlock>
+                </StackPanel>
+            </ListView.Header>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" Padding="20" HorizontalAlignment="Stretch">
+                        <Image Width="240" Height="240" Source="{Binding Image}" />
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock FontSize="36" Padding="10" Text="{Binding Name}" />
+                            <TextBlock FontSize="24" Padding="10" Text="{Binding FriendlyOwnerID}" />
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 
-namespace MoodyMusicSharedProject
+namespace MoodyMusic.Shared
 {
     public class RestService
     {
